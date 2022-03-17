@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { PostForm } from './components/postForm';
 import { PostList } from './components/postList';
 
-
-
- 
   
   export default function App() {
        
@@ -22,7 +19,7 @@ import { PostList } from './components/postList';
     const deleteTask = (taskId) => {
       setTasks(tasks.filter(({ id }) => taskId !== id));
     };
-  
+
     const newTask = (label) => {
       const newTask = {
         id: uniqueId(),
@@ -31,7 +28,12 @@ import { PostList } from './components/postList';
       };
       setTasks([...tasks, newTask]);
     };
-  
+
+  const setUpdate=(label, taskId)=>{
+  const setUp = tasks.map((task)=> task.id===taskId ? { ...task, label } : task )
+  setTasks(setUp)
+  }
+      
     return (
       <div className="container">
         <PostForm newTask={newTask} />
@@ -39,7 +41,12 @@ import { PostList } from './components/postList';
           tasks={tasks}
           completeTask={completeTask}
           deleteTask={deleteTask}
+          setUpdate={setUpdate}
         />
+         <footer>
+          <a className='link' href={'https://github.com/MrsMariya'}>MrsMariya</a>
+          <h4>2022</h4>
+        </footer>
       </div>
     );
   }

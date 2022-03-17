@@ -1,6 +1,5 @@
 import React from 'react';
-import {  useForm } from 'react-hook-form';
-
+import { useForm } from 'react-hook-form';
 
 export const PostForm = ({ newTask }) => {
   const { register, handleSubmit, reset, formState, clearErrors } = useForm({
@@ -20,19 +19,20 @@ export const PostForm = ({ newTask }) => {
       <label htmlFor="task">New Task</label>
       <input
         id="task"
+        placeholder='Enter text'
         {...register('label', {
-          required: 'task cannot be blank',
+          required: 'Task cannot be blank!',
           validate: {
             lessThanTwenty: (v) =>
-              v.length <= 30 || 'Task cannot be longer than 30 characters.',
+              v.length <= 30 || 'Task cannot be longer than 30 characters!',
           },
         })}
       />
-      <ul className="error-messages">
+      <div className="error-messages">
         {errors.map((error) => (
-          <li key={'id'}>{error.message}</li>
+          <input key={'id'} className="error" value={error.message} onChange={e=> (e.target.value, 'id')}/>
         ))}
-      </ul>
+      </div>
       <button type="submit">add</button>
     </form>
   );
